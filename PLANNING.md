@@ -178,13 +178,18 @@ Login yang disarankan: **Discord** (komunitas FR Legends banyak di Discord) + Go
 - [ ] Pelajari leaderboard FR Legends yang sudah ada di speedrun.com (aturan, kategori, apa yang kurang) supaya FRLAttack punya alasan dipakai
 
 ### Fase 1: MVP (submit + review manual)
-- [ ] Setup Next.js + Supabase + Vercel
-- [ ] Auth (Discord/Google) + profil
-- [ ] CRUD admin: sirkuit, layout, mobil, kategori
-- [ ] Form submit + upload + validasi file + cek duplikat hash
-- [ ] Panel moderator: approve/reject manual
-- [ ] Leaderboard per sirkuit + halaman profil
-- [ ] Update PB via submit ulang + riwayat
+- [x] Setup Next.js + Supabase (migrasi, RLS, storage). Deploy Vercel menunggu project Supabase dibuat.
+- [x] Auth (Discord/Google) + profil
+- [x] Admin: sirkuit, layout, mobil, peran pengguna (kategori: hanya Open, sesuai docs/KATEGORI.md)
+- [x] Form submit + upload + validasi file + cek duplikat SHA-256 + dHash sebagai petunjuk untuk moderator
+- [x] Panel moderator: approve/reject manual, dengan konteks (rekor, PB, riwayat akun, gambar mirip)
+- [x] Leaderboard per layout (filter mobil) + halaman profil
+- [x] Update PB via submit ulang + riwayat, tarik submission
+- [x] Batas 10 kiriman per jam per pemain
+- [ ] Buat project Supabase + deploy ke Vercel
+- [ ] Bersihkan otomatis file di `incoming/` yang tidak jadi dikirim (cron harian)
+
+Catatan dHash: layar hasil game selalu bertata letak sama, jadi dua screenshot berbeda di sirkuit yang sama bisa terlihat sangat mirip. Karena itu dHash tidak dipakai untuk menolak otomatis, hanya ditampilkan ke moderator. Penolakan otomatis hanya untuk file yang identik (SHA-256).
 
 > Di fase ini semua submission direview manual. Situs sudah bisa dipakai dan sekaligus mengumpulkan data untuk melatih/menguji verifikasi otomatis.
 

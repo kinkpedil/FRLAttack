@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/* Token dari docs/DESIGN.md. Warna hanya untuk makna. */
+:root {
+  --paper: #f1efe9;
+  --ink: #151515;
+  --ink-2: #5c5a55;
+  --rule: #cfcbc2;
+  --row-alt: #e8e5dd;
+  --record: #7a2bc2;
+  --pb: #11703a;
+  --slower: #7f5c00;
+  --alert: #b3241a;
+  --signal: #151515;
+  --signal-ink: #f1efe9;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #111111;
+    --ink: #eceae4;
+    --ink-2: #9a978f;
+    --rule: #2b2b2b;
+    --row-alt: #181818;
+    --record: #b57bf0;
+    --pb: #3dcb6f;
+    --slower: #e3b53a;
+    --alert: #f0574b;
+    --signal: #eceae4;
+    --signal-ink: #111111;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-rule: var(--rule);
+  --color-row-alt: var(--row-alt);
+  --color-record: var(--record);
+  --color-pb: var(--pb);
+  --color-slower: var(--slower);
+  --color-alert: var(--alert);
+  --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
+  --font-sans: var(--font-plex-sans);
+  --font-display: var(--font-plex-condensed);
+  --font-mono: var(--font-plex-mono);
+  --radius-control: 2px;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-plex-sans), system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@layer components {
+  /* Judul: kapital, padat, seperti papan pengumuman. */
+  .heading {
+    font-family: var(--font-plex-condensed), sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+
+  .label {
+    font-family: var(--font-plex-condensed), sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+  }
+
+  .num {
+    font-family: var(--font-plex-mono), ui-monospace, monospace;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .link:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Tabel timing */
+  .sheet {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .sheet th {
+    text-align: left;
+    padding: 6px 8px;
+    border-bottom: 2px solid var(--ink);
+    font-family: var(--font-plex-condensed), sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .sheet td {
+    padding: 8px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .sheet tbody tr:nth-child(even of :not(.detail, .group)) {
+    background: var(--row-alt);
+  }
+  .sheet .right {
+    text-align: right;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 16px;
+    border: 1px solid var(--signal);
+    border-radius: var(--radius-control);
+    background: var(--signal);
+    color: var(--signal-ink);
+    font-family: var(--font-plex-condensed), sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  }
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn-danger {
+    background: transparent;
+    color: var(--alert);
+    border-color: var(--alert);
+  }
+
+  .field {
+    display: block;
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 10px;
+    border: 1px solid var(--ink-2);
+    border-radius: var(--radius-control);
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .field:focus {
+    outline: 2px solid var(--ink);
+    outline-offset: 1px;
+  }
+
+  /* Status: label kapital dalam kotak garis. */
+  .status {
+    display: inline-block;
+    padding: 1px 6px;
+    border: 1px solid currentColor;
+    font-family: var(--font-plex-condensed), sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .status-pending {
+    color: var(--slower);
+  }
+  .status-approved {
+    color: var(--pb);
+  }
+  .status-rejected {
+    color: var(--alert);
+  }
+  .status-withdrawn {
+    color: var(--ink-2);
+  }
+
+  .notice {
+    border-left: 3px solid var(--ink);
+    padding: 8px 12px;
+    background: var(--row-alt);
+  }
+  .notice-error {
+    border-left-color: var(--alert);
+  }
+  .notice-ok {
+    border-left-color: var(--pb);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
