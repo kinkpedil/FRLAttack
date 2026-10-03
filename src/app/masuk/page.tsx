@@ -26,7 +26,7 @@ export default async function SignInPage(props: PageProps<"/masuk">) {
         ditampilkan.
       </PageTitle>
       {error ? <p className="notice notice-error mb-6">{error}</p> : null}
-      <div className="flex max-w-[320px] flex-col gap-3">
+      <div className="panel flex max-w-[360px] flex-col gap-3 p-4">
         <form action={signIn}>
           <input type="hidden" name="provider" value="discord" />
           <input type="hidden" name="lanjut" value={next} />

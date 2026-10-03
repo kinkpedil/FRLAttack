@@ -13,7 +13,7 @@ type Props = {
 export function AdminForm({ title, action, submitLabel, children }: Props) {
   const [state, formAction, pending] = useActionState(action, {});
   return (
-    <form action={formAction} className="grid content-start gap-3 border-t-2 border-ink pt-3">
+    <form action={formAction} className="panel grid content-start gap-3 p-4">
       <h3 className="heading text-[16px]">{title}</h3>
       {children}
       {state.error ? <p className="notice notice-error text-[14px]">{state.error}</p> : null}

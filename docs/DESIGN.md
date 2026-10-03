@@ -1,115 +1,107 @@
 # Arah Desain FRLAttack
 
-## Konsep: lembar timing, bukan landing page
+## Konsep: ruang kontrol balap
 
-FRLAttack adalah **papan waktu**. Rujukan visualnya adalah lembar hasil resmi balapan yang dicetak di sirkuit Jepang, menara timing di siaran balap, dan papan pengumuman di pit. Isinya angka, nama, dan urutan. Desain yang bagus di sini adalah desain yang membuat tabel waktu enak dibaca, bukan yang terlihat "modern".
+Rujukan: [Low Fuel Motorsport](https://lowfuelmotorsport.com/), platform liga sim racing. Nuansa yang diambil: **gelap, padat data, terasa seperti platform liga**, bukan landing page. Pemain membuka situs untuk melihat rating, posisi, event yang berjalan, dan lap time. Semua itu harus terlihat dalam satu kali lihat.
 
-Pertanyaan uji untuk setiap halaman: *apakah ini masih terlihat benar jika dicetak di kertas A4 dan ditempel di dinding pit?* Kalau elemennya hanya masuk akal di layar (glow, blur, gradien), buang.
+Isi tetap mengikuti tradisi timing balap: tabel padat, angka monospace, warna untuk makna. Yang berubah dari versi sebelumnya: latar gelap, tata letak dashboard dengan sidebar, dan panel.
+
+Pertanyaan uji untuk setiap elemen: *apakah ini menyampaikan data, status, atau aksi?* Kalau hanya hiasan, buang.
 
 ## Yang dilarang (daftar tolak)
 
-Jika salah satu ini muncul di desain atau PR, tolak.
-
 | Dilarang | Alasan |
 |----------|--------|
-| Gradien ungu/biru/pink, mesh gradient, blob, glow | Ciri paling umum web hasil generator |
+| Gradien, mesh gradient, blob, glow, neon | Ciri paling umum web hasil generator |
 | Glassmorphism, blur latar | Tidak ada hubungannya dengan balap |
-| Kartu membulat besar (radius > 4px) dengan bayangan lembut | Membuat semua halaman terlihat seperti template SaaS |
+| Radius besar (> 4px), bayangan lembut | Membuat semua halaman terlihat seperti template SaaS |
 | Grid "3 fitur" dengan ikon di atas judul | Template, tidak memberi informasi |
-| Hero besar dengan slogan + 2 tombol | Pemain datang untuk melihat waktu, bukan slogan |
+| Hero dengan slogan + 2 tombol | Halaman depan adalah dashboard, bukan iklan |
 | Emoji sebagai ikon, ikon sparkle, badge "AI" | Murahan dan tidak relevan |
 | Animasi fade/slide saat scroll, counter naik, parallax | Menghambat membaca data |
-| Teks putih tipis di atas foto | Tidak terbaca di HP |
 | Inter / Poppins / Montserrat sebagai font utama | Identitas generik |
 | Kata: "Rasakan", "Revolusioner", "Unleash", "Elevate", "Seamless", "Next-level" | Copy kosong |
 | Em dash dan en dash | Aturan proyek |
 
 ## Warna
 
-Warna hanya dipakai untuk **makna**, mengikuti konvensi timing balap yang sudah dikenal pembalap:
+Hanya mode gelap. Warna dipakai untuk makna.
 
-| Token | Terang | Gelap | Makna |
-|-------|--------|-------|-------|
-| `--paper` | `#F1EFE9` | `#111111` | Latar halaman |
-| `--ink` | `#151515` | `#ECEAE4` | Teks utama |
-| `--ink-2` | `#5C5A55` | `#9A978F` | Teks sekunder, label |
-| `--rule` | `#CFCBC2` | `#2B2B2B` | Garis tabel |
-| `--row-alt` | `#E8E5DD` | `#181818` | Baris selang-seling |
-| `--record` | `#7A2BC2` | `#B57BF0` | **Rekor sirkuit** (ungu, konvensi "fastest overall") |
-| `--pb` | `#11703A` | `#3DCB6F` | **Personal best** (hijau, konvensi timing) |
-| `--slower` | `#7F5C00` | `#E3B53A` | Lebih lambat dari PB |
-| `--alert` | `#B3241A` | `#F0574B` | Ditolak, laporan, error |
-| `--signal` | `#151515` | `#ECEAE4` | Tombol utama: hitam pekat (terang) / putih (gelap). Tanpa warna merek. |
+| Token | Nilai | Dipakai untuk |
+|-------|-------|---------------|
+| `--bg` | `#0E1013` | Latar halaman |
+| `--panel` | `#15181D` | Panel dan sidebar |
+| `--panel-2` | `#1B1F26` | Baris selang-seling, hover |
+| `--rule` | `#2A2F38` | Garis tipis, batas panel |
+| `--rule-strong` | `#3A414C` | Garis bawah kepala tabel |
+| `--ink` | `#ECEEF1` | Teks utama |
+| `--ink-2` | `#A2AAB5` | Teks sekunder, label |
+| `--accent` | `#4CC2FF` | Aksi utama, status LIVE dan MENUNGGU, menu aktif |
+| `--record` | `#C39BFF` | **Rekor** (ungu, konvensi timing "fastest overall") |
+| `--pb` | `#3DD68C` | **Personal best**, status DITERIMA |
+| `--alert` | `#FF6B5E` | Ditolak, error |
 
-Catatan: ungu di sini **bukan** dekorasi. Ia hanya muncul di satu tempat: angka rekor sirkuit. Tidak boleh dipakai untuk latar, tombol, atau gradien.
+Semua warna teks di atas lolos WCAG AA (minimal 5.3:1) di `--bg`, `--panel`, dan `--panel-2`.
+
+### Divisi
+
+Divisi itu berurutan, jadi warnanya satu gradasi amber dari terang (Div 1) ke redup (Div 6), bukan warna acak. Badge selalu memuat teks divisinya, jadi warna hanya penguat. Palet sudah divalidasi sebagai ramp ordinal (satu hue, terang monoton, jarak antar langkah cukup).
+
+| Divisi | Isi badge | Teks |
+|--------|-----------|------|
+| Div 1 | `#F7CF7E` | gelap `#0E1013` |
+| Div 2 | `#E8B04F` | gelap |
+| Div 3 | `#CF902F` | gelap |
+| Div 4 | `#AD7220` | gelap |
+| Div 5 | `#8A5918` | terang `#ECEEF1` |
+| Div 6 | `#6B4413` | terang |
+| Rookie | tanpa isi, garis `--ink-2` | `--ink` |
 
 ## Tipografi
 
 | Peran | Font | Catatan |
 |-------|------|---------|
-| Judul, nama sirkuit | **IBM Plex Sans Condensed** (600/700), huruf kapital, `letter-spacing: 0.02em` | Padat seperti papan pengumuman |
-| Teks biasa | **IBM Plex Sans** (400/500) | Jelas di layar kecil |
-| Lap time, posisi, selisih | **IBM Plex Mono** (500) | Angka sejajar, `font-variant-numeric: tabular-nums` |
+| Judul, label | **IBM Plex Sans Condensed** 600/700, kapital | Padat, seperti papan informasi |
+| Teks biasa | **IBM Plex Sans** 400/500 | |
+| Lap time, posisi, selisih di tabel | **IBM Plex Mono** 500, `tabular-nums` | Angka sejajar dalam kolom |
+| Angka besar (rating, stat) | **IBM Plex Sans** 600, angka proporsional | Angka besar terlihat renggang jika tabular |
 
-Ukuran (mobile dulu): body 15px, tabel 14px, lap time di tabel 15px mono, lap time rekor di halaman sirkuit 40px mono. Skala judul: 28 / 20 / 16.
-
-## Angka
-
-- Lap time disimpan dalam milidetik, ditampilkan **mengikuti format di layar game** supaya pemain langsung mengenali. Dugaan sementara dari referensi komunitas: `1'24"320`. **Konfirmasi dari sampel screenshot (Fase 0).**
-- Selisih ke rekor: `+0.412` (mono, warna `--ink-2`).
-- Posisi: `01`, `02`, ... rata kanan, mono.
-- Tanggal: `03 OKT 2026`.
+Lap time besar (rekor di kepala halaman) tetap mono karena dibandingkan dengan tabel di bawahnya.
 
 ## Tata letak
 
-- Lebar konten maks 960px. Mobile dulu, sebagian besar pemain FR Legends membuka dari HP.
-- Grid 4px. Jarak antar bagian 32px, antar baris tabel 0 (garis 1px `--rule`).
-- Radius: 0 untuk tabel dan panel, 2px untuk tombol dan input.
-- Tanpa bayangan. Pemisah memakai garis 1px atau perubahan latar `--row-alt`.
-- Header situs: satu baris tipis. Logo teks `FRLATTACK` (Plex Sans Condensed 700) + navigasi teks. Tanpa ikon hamburger mewah.
+- **Desktop (lebar 1024px ke atas):** sidebar kiri 232px berisi logo, menu, tombol Kirim lap time, dan pengguna. Konten maksimal 1120px.
+- **HP:** bilah atas berisi logo, tombol Kirim, dan tombol Menu yang membuka daftar menu. Tanpa sidebar.
+- **Panel:** latar `--panel`, garis 1px `--rule`, radius 4px, tanpa bayangan. Kepala panel berisi label kapital kecil dan tautan "Lihat semua" bila perlu.
+- Grid 4px. Jarak antar panel 16px (HP) atau 20px (desktop).
 
-## Komponen inti
+## Komponen
 
-**Tabel leaderboard** (komponen terpenting)
-```
-POS  PEMAIN          MOBIL       LAP TIME    SELISIH   TGL
-01   rizk_drift      AE86        1'24"320    ---       12 SEP
-02   kansai.wall     S13         1'24"733    +0.413    28 AGU
-03   ...
-```
-- Baris rekor: angka lap time berwarna `--record`.
-- PB pemain yang sedang login: latar `--row-alt` + garis kiri 3px `--pb`.
-- Ketuk baris: membuka screenshot bukti di panel bawah (mobile) atau samping (desktop).
+- **Tabel timing:** sama seperti sebelumnya. Kepala kolom label kapital, baris selang-seling `--panel-2`, angka mono rata kanan. Baris milik pemain yang login diberi garis kiri 3px `--pb`.
+- **Badge divisi:** kotak kecil radius 2px, teks kapital `DIV 1`, `ROOKIE`.
+- **Stat tile:** label kecil, angka besar sans semibold, keterangan opsional. Dipakai untuk rating, posisi, jumlah lap.
+- **Status:** label kapital dalam kotak garis: `MENUNGGU` (accent), `DITERIMA` (pb), `DITOLAK` (alert), `DITARIK` (ink-2). Event: `LIVE` (accent, isi penuh), `SEGERA`, `SELESAI`.
+- **Grafik riwayat rating:** satu seri, garis 2px warna accent, area tipis 10%, garis bantu 1px `--rule`, titik akhir 8px dengan ring warna panel, crosshair + tooltip saat hover, nilai terakhir ditulis di ujung. Tabel datanya bisa dibuka.
 
-**Kepala halaman sirkuit**
-- Nama sirkuit besar kapital, nama layout di bawahnya.
-- Garis bentuk lintasan (SVG outline 1.5px, warna `--ink`) di kanan.
-- Rekor saat ini: angka mono 40px + nama pemegang + mobil.
+## Angka
 
-**Status submission**: label teks kapital kecil dengan kotak garis, bukan "pill" berwarna penuh.
-`[ MENUNGGU ]` `[ DITERIMA ]` `[ DITOLAK ]`
-
-## Gambar
-
-- Pakai **screenshot asli dari game** (bukti submission, sirkuit). Tidak ada ilustrasi abstrak, tidak ada gambar stok, tidak ada gambar buatan AI.
-- Peta lintasan digambar sebagai garis SVG sederhana.
+- Lap time: format layar game, dugaan sementara `1'24"320` (konfirmasi dari sampel Fase 0).
+- Selisih: `+0.412`. Posisi: `01`. Rating: `2.150` tanpa desimal, pemisah ribuan titik.
+- Tanggal: `03 OKT 2026`, waktu WIB.
 
 ## Gerak
 
-- Hanya untuk umpan balik: perubahan status submission, baris yang baru masuk disorot sebentar (latar `--row-alt` 1 detik).
-- Tanpa animasi masuk halaman, tanpa animasi saat scroll.
+Hanya untuk umpan balik: hover baris, perubahan status, hitung mundur event. Tanpa animasi masuk halaman atau saat scroll.
 
 ## Penulisan
 
-- Pendek dan langsung. Contoh: "Kirim lap time", bukan "Mulai perjalanan balapmu sekarang!".
-- Pesan error menyebut masalah dan cara memperbaiki: "Lap time di screenshot terbaca 1'25"010, berbeda dari yang kamu isi (1'24"010). Periksa lagi angkanya."
-- Di UI, verifikasi otomatis disebut "Dibaca otomatis", tidak perlu menonjolkan kata AI.
+Pendek dan langsung. "Kirim lap time", bukan "Mulai perjalanan balapmu!". Pesan error menyebut masalah dan cara memperbaiki.
 
 ## Checklist review desain
 
 - [ ] Tidak ada item dari daftar tolak
-- [ ] Warna dipakai hanya untuk makna (rekor, PB, status)
-- [ ] Semua angka waktu memakai font mono + tabular-nums
+- [ ] Warna hanya untuk makna (rekor, PB, status, divisi, aksi)
+- [ ] Angka di kolom memakai mono + tabular-nums
 - [ ] Terbaca di layar 360px tanpa scroll horizontal pada halaman (tabel boleh scroll sendiri)
-- [ ] Mode gelap dan terang sama-sama lolos kontras WCAG AA
+- [ ] Kontras lolos WCAG AA
 - [ ] `scripts/check-no-dash.sh` lolos

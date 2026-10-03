@@ -9,6 +9,26 @@ export function formatDate(value: string | Date, withYear = true): string {
   return withYear ? `${day} ${month} ${wib.getUTCFullYear()}` : `${day} ${month}`;
 }
 
+// 03 OKT 20:00 WIB
+export function formatDateTime(value: string | Date): string {
+  const date = typeof value === "string" ? new Date(value) : value;
+  const wib = new Date(date.getTime() + 7 * 60 * 60 * 1000);
+  const hh = String(wib.getUTCHours()).padStart(2, "0");
+  const mm = String(wib.getUTCMinutes()).padStart(2, "0");
+  return `${formatDate(date, false)} ${hh}:${mm} WIB`;
+}
+
+// Pemisah ribuan gaya Indonesia: 2.150
+export function formatNumber(value: number): string {
+  return new Intl.NumberFormat("id-ID", { maximumFractionDigits: 0 }).format(value);
+}
+
+export const EVENT_STATUS_LABEL: Record<string, string> = {
+  live: "LIVE",
+  upcoming: "SEGERA",
+  finished: "SELESAI",
+};
+
 export function formatPosition(position: number): string {
   return String(position).padStart(2, "0");
 }

@@ -101,3 +101,78 @@ export type PersonalBestRow = {
   position: number;
   created_at: string;
 };
+
+export type Division = "div1" | "div2" | "div3" | "div4" | "div5" | "div6" | "rookie";
+
+export type DriverRating = {
+  position: number;
+  user_id: string;
+  username: string;
+  country: string | null;
+  rating: number;
+  division: Division;
+  layouts_driven: number;
+  layouts_counted: number;
+};
+
+export type LayoutScore = {
+  user_id: string;
+  layout_id: string;
+  time_ms: number;
+  record_ms: number;
+  driver_count: number;
+  score: number | null;
+};
+
+export type EventStatus = "upcoming" | "live" | "finished";
+
+export type EventRow = {
+  id: string;
+  slug: string;
+  name: string;
+  season_id: string | null;
+  season_name: string | null;
+  track_slug: string;
+  track_name: string;
+  layout_slug: string;
+  layout_name: string;
+  car_name: string | null;
+  starts_at: string;
+  ends_at: string;
+  status: EventStatus;
+  participant_count: number;
+  leader_username: string | null;
+  leader_time_ms: number | null;
+};
+
+export type EventResult = {
+  position: number;
+  submission_id: string;
+  user_id: string;
+  username: string;
+  country: string | null;
+  car_name: string;
+  time_ms: number;
+  gap_ms: number;
+  points: number;
+  created_at: string;
+};
+
+export type Season = {
+  id: string;
+  slug: string;
+  name: string;
+  starts_on: string;
+  ends_on: string;
+};
+
+export type StandingRow = {
+  position: number;
+  user_id: string;
+  username: string;
+  country: string | null;
+  points: number;
+  events_entered: number;
+  wins: number;
+  best_finish: number;
+};

@@ -209,10 +209,10 @@ export function SubmitForm({ userId, layouts, cars, defaultLayoutId }: Props) {
             type="file"
             accept="image/png,image/jpeg,image/webp"
             onChange={onFileChange}
-            className="block w-full text-[14px] file:mr-3 file:cursor-pointer file:border file:border-ink file:bg-transparent file:px-3 file:py-2 file:text-ink"
+            className="block w-full text-[14px] file:mr-3 file:cursor-pointer file:rounded-[2px] file:border file:border-rule-strong file:bg-panel-2 file:px-3 file:py-2 file:text-ink"
           />
         </label>
-        <div className="flex aspect-[16/9] items-center justify-center border border-dashed border-ink-2">
+        <div className="flex aspect-[16/9] items-center justify-center rounded-[2px] border border-dashed border-rule-strong bg-bg">
           {previewUrl ? (
             // eslint-disable-next-line @next/next/no-img-element -- pratinjau file lokal
             <img src={previewUrl} alt="Pratinjau screenshot" className="max-h-full max-w-full" />

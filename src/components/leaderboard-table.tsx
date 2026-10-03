@@ -16,7 +16,7 @@ export function LeaderboardTable({ rows, viewerId, recordMs }: Props) {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <div className="overflow-x-auto">
+    <div>
       <table className="sheet">
         <thead>
           <tr>
@@ -37,7 +37,7 @@ export function LeaderboardTable({ rows, viewerId, recordMs }: Props) {
               <Fragment key={row.submission_id}>
                 <tr
                   onClick={() => setOpenId(isOpen ? null : row.submission_id)}
-                  className={`cursor-pointer ${isViewer ? "!bg-row-alt shadow-[inset_3px_0_0_var(--pb)]" : ""}`}
+                  className={`cursor-pointer hover:!bg-panel-2 ${isViewer ? "mine" : ""}`}
                   aria-expanded={isOpen}
                 >
                   <td className="right num">{formatPosition(row.position)}</td>
@@ -56,7 +56,7 @@ export function LeaderboardTable({ rows, viewerId, recordMs }: Props) {
                 {isOpen ? (
                   <tr className="detail">
                     <td colSpan={6} className="!p-0">
-                      <div className="border-b border-ink p-2">
+                      <div className="border-b border-rule bg-bg p-2">
                         {/* eslint-disable-next-line @next/next/no-img-element -- URL bertanda tangan, tidak lewat optimizer */}
                         <img
                           src={`/bukti/${row.submission_id}`}

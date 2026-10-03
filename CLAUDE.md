@@ -19,7 +19,7 @@ Panduan lengkap: [docs/DESIGN.md](docs/DESIGN.md). Ringkasnya, yang **dilarang**
 - Font default yang dipakai semua orang (Inter, Poppins, Montserrat) sebagai identitas utama.
 - Copywriting kosong: "Rasakan pengalaman", "Revolusioner", "Unleash", "Elevate", "Seamless", "Next-level", "Tingkatkan permainanmu".
 
-Prinsip yang **dipakai**: estetika lembar timing resmi balap (tabel padat, angka monospace, garis tipis), warna dipakai hanya untuk makna (rekor, PB, status), gambar asli dari game, teks singkat dan langsung.
+Prinsip yang **dipakai**: dashboard liga balap gelap dengan rujukan Low Fuel Motorsport (sidebar, panel, tabel timing padat, angka monospace), warna dipakai hanya untuk makna (rekor, PB, status, divisi, aksi), gambar asli dari game, teks singkat dan langsung.
 
 ## 3. Bahasa
 - Teks UI dan dokumen: Bahasa Indonesia yang wajar, tidak kaku, tidak berlebihan.
@@ -41,6 +41,9 @@ Versi Next.js di repo ini (16) berbeda dari yang umum dikenal. Baca @AGENTS.md d
 
 Jalankan `npm run check` sebelum commit.
 
-## 6. Data lap time
+## 6. Rating dan event
+Rumus rating, ambang divisi, poin event, dan klasemen ada di [docs/RATING.md](docs/RATING.md) dan migrasi `20261003010000_rating_events.sql`. Ubah keduanya bersamaan, beserta halaman /aturan.
+
+## 7. Data lap time
 - Simpan sebagai integer milidetik.
 - Format tampilan mengikuti format di game (lihat docs/DESIGN.md bagian Angka).

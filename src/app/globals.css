@@ -1,58 +1,49 @@
 @import "tailwindcss";
 
-/* Token dari docs/DESIGN.md. Warna hanya untuk makna. */
+/* Token dari docs/DESIGN.md. Hanya mode gelap. Warna hanya untuk makna. */
 :root {
-  --paper: #f1efe9;
-  --ink: #151515;
-  --ink-2: #5c5a55;
-  --rule: #cfcbc2;
-  --row-alt: #e8e5dd;
-  --record: #7a2bc2;
-  --pb: #11703a;
-  --slower: #7f5c00;
-  --alert: #b3241a;
-  --signal: #151515;
-  --signal-ink: #f1efe9;
-  color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #111111;
-    --ink: #eceae4;
-    --ink-2: #9a978f;
-    --rule: #2b2b2b;
-    --row-alt: #181818;
-    --record: #b57bf0;
-    --pb: #3dcb6f;
-    --slower: #e3b53a;
-    --alert: #f0574b;
-    --signal: #eceae4;
-    --signal-ink: #111111;
-    color-scheme: dark;
-  }
+  --bg: #0e1013;
+  --panel: #15181d;
+  --panel-2: #1b1f26;
+  --rule: #2a2f38;
+  --rule-strong: #3a414c;
+  --ink: #eceef1;
+  --ink-2: #a2aab5;
+  --accent: #4cc2ff;
+  --accent-ink: #06131b;
+  --record: #c39bff;
+  --pb: #3dd68c;
+  --alert: #ff6b5e;
+  --div1: #f7cf7e;
+  --div2: #e8b04f;
+  --div3: #cf902f;
+  --div4: #ad7220;
+  --div5: #8a5918;
+  --div6: #6b4413;
+  --ink-on-light: #0e1013;
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-paper: var(--paper);
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
-  --color-rule: var(--rule);
-  --color-row-alt: var(--row-alt);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
   --color-record: var(--record);
   --color-pb: var(--pb);
-  --color-slower: var(--slower);
   --color-alert: var(--alert);
-  --color-signal: var(--signal);
-  --color-signal-ink: var(--signal-ink);
   --font-sans: var(--font-plex-sans);
   --font-display: var(--font-plex-condensed);
   --font-mono: var(--font-plex-mono);
-  --radius-control: 2px;
 }
 
 body {
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--font-plex-sans), system-ui, sans-serif;
   font-size: 15px;
@@ -60,7 +51,6 @@ body {
 }
 
 @layer components {
-  /* Judul: kapital, padat, seperti papan pengumuman. */
   .heading {
     font-family: var(--font-plex-condensed), sans-serif;
     font-weight: 700;
@@ -78,19 +68,47 @@ body {
     color: var(--ink-2);
   }
 
+  /* Angka dalam kolom: mono, sejajar. */
   .num {
     font-family: var(--font-plex-mono), ui-monospace, monospace;
     font-weight: 500;
     font-variant-numeric: tabular-nums;
   }
 
+  /* Angka besar berdiri sendiri: sans, proporsional. */
+  .figure {
+    font-family: var(--font-plex-sans), sans-serif;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
   .link {
     text-decoration: underline;
+    text-decoration-color: var(--rule-strong);
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
   }
   .link:hover {
-    text-decoration-thickness: 2px;
+    text-decoration-color: var(--ink);
+  }
+
+  /* Panel */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+  .panel-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .panel-body {
+    padding: 16px;
   }
 
   /* Tabel timing */
@@ -101,8 +119,8 @@ body {
   }
   .sheet th {
     text-align: left;
-    padding: 6px 8px;
-    border-bottom: 2px solid var(--ink);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--rule-strong);
     font-family: var(--font-plex-condensed), sans-serif;
     font-weight: 600;
     font-size: 12px;
@@ -112,15 +130,21 @@ body {
     white-space: nowrap;
   }
   .sheet td {
-    padding: 8px;
+    padding: 9px 12px;
     border-bottom: 1px solid var(--rule);
-    vertical-align: top;
+    vertical-align: middle;
+  }
+  .sheet tbody tr:last-child td {
+    border-bottom: 0;
   }
   .sheet tbody tr:nth-child(even of :not(.detail, .group)) {
-    background: var(--row-alt);
+    background: var(--panel-2);
   }
   .sheet .right {
     text-align: right;
+  }
+  .sheet tr.mine td:first-child {
+    box-shadow: inset 3px 0 0 var(--pb);
   }
 
   .btn {
@@ -130,16 +154,21 @@ body {
     gap: 8px;
     min-height: 40px;
     padding: 0 16px;
-    border: 1px solid var(--signal);
-    border-radius: var(--radius-control);
-    background: var(--signal);
-    color: var(--signal-ink);
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    background: var(--accent);
+    color: var(--accent-ink);
     font-family: var(--font-plex-condensed), sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:hover {
+    background: #7fd3ff;
+    border-color: #7fd3ff;
   }
   .btn:disabled {
     opacity: 0.5;
@@ -148,10 +177,19 @@ body {
   .btn-ghost {
     background: transparent;
     color: var(--ink);
+    border-color: var(--rule-strong);
+  }
+  .btn-ghost:hover {
+    background: var(--panel-2);
+    border-color: var(--ink-2);
   }
   .btn-danger {
     background: transparent;
     color: var(--alert);
+    border-color: var(--alert);
+  }
+  .btn-danger:hover {
+    background: var(--panel-2);
     border-color: var(--alert);
   }
 
@@ -160,14 +198,15 @@ body {
     width: 100%;
     min-height: 40px;
     padding: 8px 10px;
-    border: 1px solid var(--ink-2);
-    border-radius: var(--radius-control);
-    background: var(--paper);
+    border: 1px solid var(--rule-strong);
+    border-radius: 2px;
+    background: var(--bg);
     color: var(--ink);
   }
   .field:focus {
-    outline: 2px solid var(--ink);
-    outline-offset: 1px;
+    outline: 2px solid var(--accent);
+    outline-offset: 0;
+    border-color: var(--accent);
   }
 
   /* Status: label kapital dalam kotak garis. */
@@ -175,14 +214,17 @@ body {
     display: inline-block;
     padding: 1px 6px;
     border: 1px solid currentColor;
+    border-radius: 2px;
     font-family: var(--font-plex-condensed), sans-serif;
     font-weight: 600;
     font-size: 12px;
+    line-height: 1.5;
     letter-spacing: 0.06em;
     white-space: nowrap;
   }
-  .status-pending {
-    color: var(--slower);
+  .status-pending,
+  .status-upcoming {
+    color: var(--accent);
   }
   .status-approved {
     color: var(--pb);
@@ -190,14 +232,44 @@ body {
   .status-rejected {
     color: var(--alert);
   }
-  .status-withdrawn {
+  .status-withdrawn,
+  .status-finished {
     color: var(--ink-2);
   }
+  .status-live {
+    color: var(--accent-ink);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* Badge divisi: ramp amber ordinal, teks dipilih dari luminansi isi. */
+  .division {
+    display: inline-block;
+    min-width: 52px;
+    padding: 1px 6px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-family: var(--font-plex-condensed), sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .division-div1 { background: var(--div1); color: var(--ink-on-light); }
+  .division-div2 { background: var(--div2); color: var(--ink-on-light); }
+  .division-div3 { background: var(--div3); color: var(--ink-on-light); }
+  .division-div4 { background: var(--div4); color: var(--ink-on-light); }
+  .division-div5 { background: var(--div5); color: var(--ink); }
+  .division-div6 { background: var(--div6); color: var(--ink); }
+  .division-rookie { border-color: var(--ink-2); color: var(--ink); }
 
   .notice {
-    border-left: 3px solid var(--ink);
-    padding: 8px 12px;
-    background: var(--row-alt);
+    border-left: 3px solid var(--ink-2);
+    padding: 10px 14px;
+    background: var(--panel-2);
+    border-radius: 0 2px 2px 0;
   }
   .notice-error {
     border-left-color: var(--alert);
@@ -205,9 +277,31 @@ body {
   .notice-ok {
     border-left-color: var(--pb);
   }
+  .notice-info {
+    border-left-color: var(--accent);
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 0 12px;
+    border-left: 2px solid transparent;
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+  .nav-link:hover {
+    color: var(--ink);
+    background: var(--panel-2);
+  }
+  .nav-link[aria-current="page"] {
+    color: var(--ink);
+    border-left-color: var(--accent);
+    background: var(--panel-2);
+  }
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }

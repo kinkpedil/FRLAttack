@@ -75,7 +75,7 @@ export default async function ReviewPage(props: PageProps<"/mod/[id]">) {
         <div>
           <a href={`/bukti/${sub.id}?asli=1`} target="_blank" rel="noreferrer">
             {/* eslint-disable-next-line @next/next/no-img-element -- URL bertanda tangan */}
-            <img src={`/bukti/${sub.id}?asli=1`} alt="Screenshot asli" className="block h-auto w-full border border-ink" />
+            <img src={`/bukti/${sub.id}?asli=1`} alt="Screenshot asli" className="block h-auto w-full rounded-[2px] border border-rule" />
           </a>
           <p className="mt-2 text-[13px] text-ink-2">
             File asli {sub.image_width}x{sub.image_height}. Ketuk gambar untuk membuka ukuran penuh.
@@ -120,7 +120,7 @@ export default async function ReviewPage(props: PageProps<"/mod/[id]">) {
           )}
         </div>
 
-        <aside className="grid content-start gap-6">
+        <aside className="panel grid content-start gap-6 p-4">
           <div>
             <p className="label">Diisi pemain</p>
             <p className="num text-[32px] leading-tight">{formatLapTime(sub.time_ms)}</p>
@@ -166,7 +166,7 @@ export default async function ReviewPage(props: PageProps<"/mod/[id]">) {
               PB pemain ini:{" "}
               <span className="num">{ownBest ? formatLapTime(ownBest.time_ms) : "-"}</span>
               {ownBest && sub.time_ms > ownBest.time_ms ? (
-                <span className="num text-slower"> (kiriman ini {formatGap(sub.time_ms - ownBest.time_ms)})</span>
+                <span className="num text-ink-2"> (kiriman ini {formatGap(sub.time_ms - ownBest.time_ms)})</span>
               ) : null}
             </p>
             <p>

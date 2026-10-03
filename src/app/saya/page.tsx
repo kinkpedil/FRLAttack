@@ -35,7 +35,9 @@ export default async function MySubmissionsPage(props: PageProps<"/saya">) {
           Belum ada submission. <Link className="link" href="/kirim">Kirim lap time</Link>.
         </p>
       ) : (
-        <SubmissionList rows={rows} showStatus withdrawAction={withdrawSubmission} />
+        <div className="panel overflow-x-auto">
+          <SubmissionList rows={rows} showStatus withdrawAction={withdrawSubmission} />
+        </div>
       )}
     </>
   );

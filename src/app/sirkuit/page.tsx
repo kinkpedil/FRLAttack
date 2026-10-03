@@ -26,7 +26,7 @@ export default async function TracksPage() {
 
       {tracks.size === 0 ? <p className="text-ink-2">Belum ada sirkuit terdaftar.</p> : null}
 
-      <div className="overflow-x-auto">
+      <div className="panel overflow-x-auto">
         <table className="sheet">
           <thead>
             <tr>
@@ -40,7 +40,7 @@ export default async function TracksPage() {
           {[...tracks.values()].map((track) => (
             <tbody key={track.slug}>
               <tr className="group">
-                <td colSpan={5} className="!border-b-ink !pt-6">
+                <td colSpan={5} className="!border-b-rule-strong !pt-5">
                   <span className="heading text-[16px]">{track.name}</span>
                 </td>
               </tr>

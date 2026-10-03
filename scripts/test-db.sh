@@ -27,11 +27,19 @@ fi
 run "'$PG_BIN/initdb' -D '$WORK/data' -U postgres --auth=trust >/dev/null"
 run "'$PG_BIN/pg_ctl' -D '$WORK/data' -o '-p $PORT -k $WORK -c listen_addresses=' -l '$WORK/log' start -w >/dev/null"
 
-PSQL=("$PG_BIN/psql" -h "$WORK" -p "$PORT" -U postgres -d postgres -v ON_ERROR_STOP=1 -q)
+PSQL=("$PG_BIN/psql" -h "$WORK" -p "$PORT" -U postgres -v ON_ERROR_STOP=1 -q)
 
-"${PSQL[@]}" -f supabase/tests/stubs.sql
-for f in supabase/migrations/*.sql; do
-  "${PSQL[@]}" -f "$f"
+# Setiap file tes mendapat database baru: stub Supabase, migrasi, seed, helper.
+for test in supabase/tests/*.sql; do
+  case "$(basename "$test")" in stubs.sql|helpers.sql) continue ;; esac
+  db="t_$(basename "$test" .sql)"
+  "${PSQL[@]}" -d postgres -c "create database \"$db\"" >/dev/null
+  "${PSQL[@]}" -d "$db" -f supabase/tests/stubs.sql
+  for f in supabase/migrations/*.sql; do
+    "${PSQL[@]}" -d "$db" -f "$f"
+  done
+  "${PSQL[@]}" -d "$db" -f supabase/seed.sql
+  echo "== $(basename "$test")"
+  cat supabase/tests/helpers.sql "$test" | "${PSQL[@]}" -d "$db" -o /dev/null 2>&1 | sed -E 's/^(psql:[^ ]* )?NOTICE:  /  /'
 done
-"${PSQL[@]}" -f supabase/seed.sql
-"${PSQL[@]}" -o /dev/null -f supabase/tests/access.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
+echo "Semua uji database lolos."

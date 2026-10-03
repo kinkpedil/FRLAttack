@@ -12,7 +12,7 @@ type Props = {
 
 export function SubmissionList({ rows, showStatus = false, withdrawAction }: Props) {
   return (
-    <div className="overflow-x-auto">
+    <div>
       <table className="sheet">
         <thead>
           <tr>

@@ -193,6 +193,15 @@ Catatan dHash: layar hasil game selalu bertata letak sama, jadi dua screenshot b
 
 > Di fase ini semua submission direview manual. Situs sudah bisa dipakai dan sekaligus mengumpulkan data untuk melatih/menguji verifikasi otomatis.
 
+### Fase 1b: Fitur liga (rujukan Low Fuel Motorsport)
+- [x] Rating pembalap dari PB vs rekor tiap layout, divisi Rookie sampai Div 1 ([docs/RATING.md](docs/RATING.md))
+- [x] Riwayat rating harian + grafik di profil
+- [x] Event mingguan (layout, periode, mobil wajib opsional) dengan poin
+- [x] Musim dan klasemen
+- [x] Halaman statistik: leaderboard rating, sebaran divisi, paling aktif, mobil terpopuler
+- [x] Desain diganti ke dashboard gelap dengan sidebar ([docs/DESIGN.md](docs/DESIGN.md))
+- [ ] Kode event di screenshot jika kiriman screenshot lama jadi masalah (lihat batasan di docs/RATING.md)
+
 ### Fase 2: Verifikasi otomatis
 - [ ] Integrasi model vision + output JSON terstruktur
 - [ ] Logika pencocokan & keputusan (auto-approve / review / tolak)

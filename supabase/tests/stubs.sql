@@ -1,9 +1,14 @@
 -- Tiruan minimal skema Supabase (auth, storage, peran) untuk menguji migrasi
 -- di Postgres biasa. Hanya dipakai oleh scripts/test-db.sh, bukan di production.
 
-create role anon nologin;
-create role authenticated nologin;
-create role service_role nologin bypassrls;
+-- Peran berlaku untuk seluruh cluster; buat sekali saja.
+do $$
+begin
+  create role anon nologin;
+  create role authenticated nologin;
+  create role service_role nologin bypassrls;
+exception when duplicate_object then null;
+end $$;
 
 create schema auth;
 create table auth.users (

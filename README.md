@@ -1,14 +1,15 @@
 # FRLAttack
 
-Database lap time komunitas untuk game **FR Legends**. Pemain mengirim screenshot best lap, moderator memverifikasinya, lalu waktu yang lolos masuk ke leaderboard tiap layout sirkuit.
+Platform liga lap time komunitas untuk game **FR Legends**, dengan rujukan [Low Fuel Motorsport](https://lowfuelmotorsport.com/). Pemain mengirim screenshot best lap, moderator memverifikasinya, lalu waktu yang lolos masuk ke leaderboard, rating pembalap, dan event mingguan.
 
-Status: **Fase 1 (MVP, review manual)**. Verifikasi otomatis dari screenshot menyusul di Fase 2.
+Status: **Fase 1 + fitur liga (review manual)**. Verifikasi otomatis dari screenshot menyusul di Fase 2.
 
 | Dokumen | Isi |
 |---------|-----|
 | [PLANNING.md](PLANNING.md) | Rencana proyek dan tahapan |
 | [CLAUDE.md](CLAUDE.md) | Aturan proyek (wajib) |
 | [docs/DESIGN.md](docs/DESIGN.md) | Arah desain |
+| [docs/RATING.md](docs/RATING.md) | Rating, divisi, event, musim |
 | [docs/KATEGORI.md](docs/KATEGORI.md) | Struktur leaderboard |
 | [docs/ATURAN.md](docs/ATURAN.md) | Aturan submission |
 | [samples/README.md](samples/README.md) | Panduan sampel screenshot |
@@ -22,15 +23,19 @@ Next.js 16 (App Router) + Tailwind CSS 4, Supabase (Postgres, Auth, Storage), ho
 
 ```
 src/app/            halaman dan server action
+  page.tsx          dashboard (rating, event berjalan, rekor, klasemen)
+  event/            daftar event mingguan dan hasilnya
+  klasemen/         klasemen musim
+  statistik/        leaderboard rating, sebaran divisi, paling aktif, mobil
   sirkuit/          daftar sirkuit dan leaderboard per layout
   kirim/            form kirim lap time
   saya/ profil/     submission dan profil pemain yang login
   pemain/           profil publik
   mod/              antrian dan review moderator
-  admin/            kelola sirkuit, layout, mobil, peran
+  admin/            kelola event, musim, sirkuit, layout, mobil, peran
   bukti/[id]/       signed URL screenshot (cek akses lewat RLS)
 src/lib/            lap time, gambar, query, klien Supabase
-supabase/migrations skema, RLS, fungsi leaderboard, bucket storage
+supabase/migrations skema, RLS, fungsi leaderboard, rating, event, bucket storage
 supabase/seed.sql   data awal (draf, belum dicek di game)
 supabase/tests/     uji akses database
 ```
@@ -57,7 +62,7 @@ npm run dev
 ## Menyiapkan Supabase
 
 1. Buat project Supabase.
-2. Jalankan `supabase/migrations/20261003000000_init.sql` (SQL Editor, atau `supabase db push` dengan Supabase CLI).
+2. Jalankan semua file di `supabase/migrations/` sesuai urutan nama (SQL Editor, atau `supabase db push` dengan Supabase CLI).
 3. Opsional: jalankan `supabase/seed.sql` untuk data awal sirkuit dan mobil. **Cek dulu nama-namanya di game.**
 4. Authentication > Providers: aktifkan **Discord** dan **Google**.
 5. Authentication > URL Configuration: tambahkan `https://<domain>/auth/callback` (dan `http://localhost:3000/auth/callback` untuk lokal) ke Redirect URLs.

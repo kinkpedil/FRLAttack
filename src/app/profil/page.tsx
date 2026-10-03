@@ -10,7 +10,9 @@ export default async function ProfilePage() {
   return (
     <>
       <PageTitle title="Ubah profil" />
-      <ProfileForm profile={viewer.profile} />
+      <div className="panel max-w-[520px] p-4 lg:p-6">
+        <ProfileForm profile={viewer.profile} />
+      </div>
     </>
   );
 }

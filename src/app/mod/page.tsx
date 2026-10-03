@@ -37,7 +37,7 @@ export default async function ModQueuePage() {
       {rows.length === 0 ? (
         <p className="text-ink-2">Antrian kosong.</p>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="panel overflow-x-auto">
           <table className="sheet">
             <thead>
               <tr>
