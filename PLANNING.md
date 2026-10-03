@@ -1,4 +1,4 @@
-# FRLAttack — Rencana Proyek
+# FRLAttack: Rencana Proyek
 
 > Database lap time komunitas untuk game **FR Legends**. Pemain mengirim screenshot best lap, sistem membaca dan memverifikasi waktunya, lalu waktu yang lolos masuk ke leaderboard tiap sirkuit.
 
@@ -39,7 +39,7 @@ flowchart TD
 ```
 
 ### 2.1 Update lap time
-- Pemain cukup **submit ulang** di sirkuit yang sama. Tidak ada tombol "edit angka" — setiap perubahan harus lewat screenshot baru supaya tetap terverifikasi.
+- Pemain cukup **submit ulang** di sirkuit yang sama. Tidak ada tombol "edit angka". Setiap perubahan harus lewat screenshot baru supaya tetap terverifikasi.
 - Leaderboard memakai **waktu tercepat yang approved** per pemain per (sirkuit, kategori).
 - Submission lama tidak dihapus; masuk ke **riwayat progres** pemain (bisa dibuat grafik progres nanti).
 - Pemain bisa menarik (withdraw) submission miliknya sendiri; leaderboard otomatis kembali ke PB sebelumnya.
@@ -50,12 +50,12 @@ flowchart TD
 
 Verifikasi dibagi berlapis. Tidak ada satu cara pun yang anti-curang 100%, jadi tujuannya: **otomatis untuk kasus normal, manusia untuk kasus mencurigakan.**
 
-### Lapis 1 — Validasi file (instan)
+### Lapis 1: Validasi file (instan)
 - Tipe: PNG/JPG/WEBP, maksimal ±8 MB, resolusi minimal (mis. 720p) supaya teks terbaca.
 - **Hash gambar** (SHA-256 untuk duplikat persis + perceptual hash/pHash untuk duplikat yang di-resize/crop ringan). Screenshot yang sudah pernah dipakai → tolak.
 - Simpan file asli di storage privat sebagai bukti; tampilkan versi terkompresi di publik.
 
-### Lapis 2 — Ekstraksi data dari gambar
+### Lapis 2: Ekstraksi data dari gambar
 Membaca dari screenshot:
 - Lap time (mis. `1:12.345`)
 - Nama sirkuit (jika tertera di layar)
@@ -65,7 +65,7 @@ Pilihan teknologi:
 
 | Opsi | Kelebihan | Kekurangan |
 |------|-----------|------------|
-| **Model vision (Claude Haiku 4.5 / Sonnet 5.5) dengan output terstruktur (JSON)** — *rekomendasi* | Paham konteks layar game, tahan font bergaya, bisa sekalian menilai "apakah ini benar layar hasil FR Legends" | Ada biaya per gambar, perlu API key |
+| **Model vision (Claude Haiku 4.5 / Sonnet 5.5) dengan output terstruktur (JSON)** (*rekomendasi*) | Paham konteks layar game, tahan font bergaya, bisa sekalian menilai "apakah ini benar layar hasil FR Legends" | Ada biaya per gambar, perlu API key |
 | OCR klasik (Tesseract) | Gratis, bisa jalan sendiri | Lemah di font game & latar ramai, perlu cropping per-layout |
 | Google Cloud Vision OCR | Akurat untuk teks | Hanya teks mentah, logika pencocokan harus dibuat sendiri |
 
@@ -74,15 +74,15 @@ Rekomendasi: **model vision sebagai jalur utama**, dengan prompt yang meminta JS
 {
   "is_fr_legends_result_screen": true,
   "lap_time": "1:12.345",
-  "track_name": "…",
-  "car_name": "…",
-  "player_name": "…",
+  "track_name": "...",
+  "car_name": "...",
+  "player_name": "...",
   "confidence": 0.0,
   "notes": "tanda-tanda edit, teks terpotong, dll."
 }
 ```
 
-### Lapis 3 — Pencocokan & keputusan
+### Lapis 3: Pencocokan & keputusan
 | Kondisi | Keputusan |
 |---------|-----------|
 | Lap time terbaca **sama persis** (dalam milidetik) dengan input, sirkuit cocok, confidence tinggi | **Auto-approve** |
@@ -91,7 +91,7 @@ Rekomendasi: **model vision sebagai jalur utama**, dengan prompt yang meminta JS
 | Akun baru (mis. < 3 submission approved) | **Review moderator** untuk beberapa submission pertama |
 | Lap time terbaca berbeda dari input, atau bukan layar FR Legends | **Tolak** + alasan |
 
-### Lapis 4 — Pengawasan komunitas
+### Lapis 4: Pengawasan komunitas
 - Tombol **Laporkan** di setiap entri leaderboard (alasan: edit/foto palsu, akun ganda, dll.).
 - Entri yang dilaporkan beberapa kali → kembali ke antrian review.
 - Opsional untuk **Top 3 / rekor sirkuit**: minta bukti video (link YouTube/TikTok) tambahan.
@@ -164,13 +164,20 @@ Login yang disarankan: **Discord** (komunitas FR Legends banyak di Discord) + Go
 
 ## 7. Tahapan Pengerjaan
 
-### Fase 0 — Riset & persiapan
-- [ ] Kumpulkan 30–50 screenshot layar hasil lap asli (berbagai sirkuit, HP, resolusi)
-- [ ] Susun daftar resmi sirkuit + layout + mobil yang akan didaftarkan
-- [ ] Tentukan kategori leaderboard (lihat Pertanyaan Terbuka)
-- [ ] Tulis halaman aturan submission
+### Fase 0: Riset & persiapan
+- [x] Aturan proyek: tanpa em dash, desain tidak AI slop ([CLAUDE.md](CLAUDE.md), `scripts/check-no-dash.sh`)
+- [x] Arah desain dan token warna/font ([docs/DESIGN.md](docs/DESIGN.md))
+- [x] Draf daftar sirkuit, layout, mobil ([data/](data/)), **belum dicek di game**
+- [x] Usulan struktur leaderboard ([docs/KATEGORI.md](docs/KATEGORI.md)), **menunggu keputusan**
+- [x] Draf halaman aturan submission ([docs/ATURAN.md](docs/ATURAN.md))
+- [x] Panduan dan template pengumpulan sampel ([samples/README.md](samples/README.md))
+- [ ] Kumpulkan 30 sampai 50 screenshot layar hasil lap asli (berbagai sirkuit, HP, resolusi)
+- [ ] Cek daftar sirkuit, layout, mobil langsung di game, tandai `verified: true`
+- [ ] Konfirmasi format lap time di layar game
+- [ ] Putuskan struktur leaderboard
+- [ ] Pelajari leaderboard FR Legends yang sudah ada di speedrun.com (aturan, kategori, apa yang kurang) supaya FRLAttack punya alasan dipakai
 
-### Fase 1 — MVP (submit + review manual)
+### Fase 1: MVP (submit + review manual)
 - [ ] Setup Next.js + Supabase + Vercel
 - [ ] Auth (Discord/Google) + profil
 - [ ] CRUD admin: sirkuit, layout, mobil, kategori
@@ -181,20 +188,20 @@ Login yang disarankan: **Discord** (komunitas FR Legends banyak di Discord) + Go
 
 > Di fase ini semua submission direview manual. Situs sudah bisa dipakai dan sekaligus mengumpulkan data untuk melatih/menguji verifikasi otomatis.
 
-### Fase 2 — Verifikasi otomatis
+### Fase 2: Verifikasi otomatis
 - [ ] Integrasi model vision + output JSON terstruktur
 - [ ] Logika pencocokan & keputusan (auto-approve / review / tolak)
-- [ ] Uji akurasi pada kumpulan screenshot Fase 0–1 (target: ≥ 95% lap time terbaca tepat)
+- [ ] Uji akurasi pada kumpulan screenshot Fase 0 dan 1 (target: ≥ 95% lap time terbaca tepat)
 - [ ] Deteksi outlier & aturan akun baru
 - [ ] Tampilkan status verifikasi real-time ke pemain
 
-### Fase 3 — Komunitas & kepercayaan
+### Fase 3: Komunitas & kepercayaan
 - [ ] Fitur lapor + alur penanganan laporan
 - [ ] Bukti video untuk rekor/Top 3
 - [ ] Badge (pemegang rekor, terverifikasi), notifikasi saat rekor dipecahkan
 - [ ] Grafik progres pemain
 
-### Fase 4 — Polesan
+### Fase 4: Polesan
 - [ ] SEO & gambar share (Open Graph) untuk tiap leaderboard
 - [ ] Dukungan bahasa Indonesia & Inggris
 - [ ] Statistik global (sirkuit terpopuler, mobil terbanyak dipakai)
