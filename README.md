@@ -63,6 +63,8 @@ npm run dev
 
 `NEXT_PUBLIC_*` ditanam ke kode browser saat build, jadi harus sudah diisi sebelum `npm run build`.
 
+Di Vercel, framework dikunci ke Next.js lewat `vercel.json`. Tanpa itu, project yang dibuat dengan preset "Other" gagal dengan pesan `No Output Directory named "public"`.
+
 ## Menyiapkan Supabase
 
 1. Buat project Supabase.
