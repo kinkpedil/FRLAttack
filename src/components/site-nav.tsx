@@ -10,7 +10,7 @@ type Props = {
 };
 
 const MAIN = [
-  { href: "/", label: "Beranda" },
+  { href: "/dashboard", label: "Dashboard" },
   { href: "/event", label: "Event" },
   { href: "/klasemen", label: "Klasemen" },
   { href: "/sirkuit", label: "Sirkuit" },
@@ -19,7 +19,7 @@ const MAIN = [
 ];
 
 function isActive(pathname: string, href: string) {
-  return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+  return pathname === href || pathname.startsWith(`${href}/`);
 }
 
 function NavList({ username, role, onNavigate }: Props & { onNavigate?: () => void }) {

@@ -16,7 +16,7 @@ Pertanyaan uji untuk setiap elemen: *apakah ini menyampaikan data, status, atau 
 | Glassmorphism, blur latar | Tidak ada hubungannya dengan balap |
 | Radius besar (> 4px), bayangan lembut | Membuat semua halaman terlihat seperti template SaaS |
 | Grid "3 fitur" dengan ikon di atas judul | Template, tidak memberi informasi |
-| Hero dengan slogan + 2 tombol | Halaman depan adalah dashboard, bukan iklan |
+| Hero dengan slogan kosong + ilustrasi abstrak | Bagian pembuka landing page memakai judul konkret dan data asli (event berjalan) |
 | Emoji sebagai ikon, ikon sparkle, badge "AI" | Murahan dan tidak relevan |
 | Animasi fade/slide saat scroll, counter naik, parallax | Menghambat membaca data |
 | Inter / Poppins / Montserrat sebagai font utama | Identitas generik |
@@ -69,6 +69,18 @@ Divisi itu berurutan, jadi warnanya satu gradasi amber dari terang (Div 1) ke re
 Lap time besar (rekor di kepala halaman) tetap mono karena dibandingkan dengan tabel di bawahnya.
 
 ## Tata letak
+
+Ada dua kerangka:
+
+1. **Landing page (`/`, `src/app/(site)/`)**: menu atas tanpa sidebar, konten lebar sampai 1200px, footer. Urutan bagian:
+   - Pembuka: kiri judul konkret ("Leaderboard lap time FR Legends"), satu kalimat penjelasan, satu tombol utama + satu tautan teks. Kanan panel event yang sedang berjalan (data asli, hitung mundur, 5 teratas). Tanpa ilustrasi.
+   - Strip angka situs (pembalap, lap diterima, layout, event).
+   - Cara kerja: 4 langkah bernomor `01` sampai `04` dalam satu panel bergaris, tanpa ikon.
+   - Satu bagian per fitur (event, rating, sirkuit, klasemen): kiri judul + penjelasan + tombol ke halamannya, kanan cuplikan data asli.
+   - Penutup: satu panel dengan garis kiri accent dan tombol kirim.
+2. **Halaman fitur (`src/app/(app)/`)**: dashboard, event, klasemen, sirkuit, statistik, aturan, profil, kirim, moderasi, admin. Memakai sidebar seperti di bawah.
+
+Setelah login, pemain diarahkan ke `/dashboard`.
 
 - **Desktop (lebar 1024px ke atas):** sidebar kiri 232px berisi logo, menu, tombol Kirim lap time, dan pengguna. Konten maksimal 1120px.
 - **HP:** bilah atas berisi logo, tombol Kirim, dan tombol Menu yang membuka daftar menu. Tanpa sidebar.

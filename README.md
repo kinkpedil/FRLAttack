@@ -22,18 +22,22 @@ Next.js 16 (App Router) + Tailwind CSS 4, Supabase (Postgres, Auth, Storage), ho
 ## Struktur
 
 ```
-src/app/            halaman dan server action
-  page.tsx          dashboard (rating, event berjalan, rekor, klasemen)
-  event/            daftar event mingguan dan hasilnya
-  klasemen/         klasemen musim
-  statistik/        leaderboard rating, sebaran divisi, paling aktif, mobil
-  sirkuit/          daftar sirkuit dan leaderboard per layout
-  kirim/            form kirim lap time
-  saya/ profil/     submission dan profil pemain yang login
-  pemain/           profil publik
-  mod/              antrian dan review moderator
-  admin/            kelola event, musim, sirkuit, layout, mobil, peran
+src/app/
+  (site)/           landing page di / (menu atas, cuplikan tiap fitur)
+  (app)/            halaman fitur dengan sidebar
+    dashboard/      ringkasan pribadi: rating, event berjalan, rekor, klasemen
+    event/          daftar event mingguan dan hasilnya
+    klasemen/       klasemen musim
+    statistik/      leaderboard rating, sebaran divisi, paling aktif, mobil
+    sirkuit/        daftar sirkuit dan leaderboard per layout
+    kirim/          form kirim lap time
+    saya/ profil/   submission dan profil pemain yang login
+    pemain/         profil publik
+    mod/            antrian dan review moderator
+    admin/          kelola event, musim, sirkuit, layout, mobil, peran
+    aturan/ masuk/  aturan dan login
   bukti/[id]/       signed URL screenshot (cek akses lewat RLS)
+  auth/ keluar/     callback login dan logout
 src/lib/            lap time, gambar, query, klien Supabase
 supabase/migrations skema, RLS, fungsi leaderboard, rating, event, bucket storage
 supabase/seed.sql   data awal (draf, belum dicek di game)

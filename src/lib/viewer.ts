@@ -33,6 +33,6 @@ export async function requireViewer(next: string): Promise<Viewer> {
 export async function requireRole(role: "mod" | "admin", next: string): Promise<Viewer> {
   const viewer = await requireViewer(next);
   const allowed = role === "mod" ? ["mod", "admin"] : ["admin"];
-  if (!allowed.includes(viewer.profile.role)) redirect("/");
+  if (!allowed.includes(viewer.profile.role)) redirect("/dashboard");
   return viewer;
 }

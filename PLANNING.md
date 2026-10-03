@@ -201,6 +201,7 @@ Catatan dHash: layar hasil game selalu bertata letak sama, jadi dua screenshot b
 - [x] Halaman statistik: leaderboard rating, sebaran divisi, paling aktif, mobil terpopuler
 - [x] Desain diganti ke dashboard gelap dengan sidebar ([docs/DESIGN.md](docs/DESIGN.md))
 - [ ] Kode event di screenshot jika kiriman screenshot lama jadi masalah (lihat batasan di docs/RATING.md)
+- [x] Landing page di `/`, dashboard pindah ke `/dashboard`, setiap fitur punya halaman sendiri
 
 ### Fase 2: Verifikasi otomatis
 - [ ] Integrasi model vision + output JSON terstruktur

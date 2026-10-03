@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { DivisionBadge } from "@/components/division-badge";
 import { EventCard } from "@/components/event-card";
@@ -19,7 +20,9 @@ import { formatDate, formatNumber, formatPosition } from "@/lib/format";
 import { formatLapTime } from "@/lib/laptime";
 import { getViewer } from "@/lib/viewer";
 
-export default async function HomePage() {
+export const metadata: Metadata = { title: "Dashboard" };
+
+export default async function DashboardPage() {
   const [viewer, ratings, events, overview, recent, seasons, stats] = await Promise.all([
     getViewer(),
     getDriverRatings(),

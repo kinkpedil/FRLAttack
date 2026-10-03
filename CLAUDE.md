@@ -19,7 +19,7 @@ Panduan lengkap: [docs/DESIGN.md](docs/DESIGN.md). Ringkasnya, yang **dilarang**
 - Font default yang dipakai semua orang (Inter, Poppins, Montserrat) sebagai identitas utama.
 - Copywriting kosong: "Rasakan pengalaman", "Revolusioner", "Unleash", "Elevate", "Seamless", "Next-level", "Tingkatkan permainanmu".
 
-Prinsip yang **dipakai**: dashboard liga balap gelap dengan rujukan Low Fuel Motorsport (sidebar, panel, tabel timing padat, angka monospace), warna dipakai hanya untuk makna (rekor, PB, status, divisi, aksi), gambar asli dari game, teks singkat dan langsung.
+Prinsip yang **dipakai**: landing page di `/` dengan cuplikan data asli, halaman fitur masing-masing berbentuk dashboard liga balap gelap dengan rujukan Low Fuel Motorsport (sidebar, panel, tabel timing padat, angka monospace), warna dipakai hanya untuk makna (rekor, PB, status, divisi, aksi), gambar asli dari game, teks singkat dan langsung.
 
 ## 3. Bahasa
 - Teks UI dan dokumen: Bahasa Indonesia yang wajar, tidak kaku, tidak berlebihan.
