@@ -1,0 +1,93 @@
+{
+  "_status": "DRAF. Dikumpulkan dari hasil pencarian web (situs komunitas, bukan sumber resmi). Setiap nama sirkuit dan layout WAJIB dicek langsung di game sebelum dipakai. Ubah verified ke true setelah dicek.",
+  "_sources": [
+    "https://frlmods.com/wiki/tracks",
+    "https://frlegendszone.com/fr-legends-all-tracks-guide/",
+    "https://www.speedrun.com/FR_Legends/levels"
+  ],
+  "tracks": [
+    {
+      "slug": "drift-park",
+      "name": "Drift Park",
+      "real_world_reference": null,
+      "verified": false,
+      "layouts": [
+        { "slug": "a", "name": "A", "type": "drift", "verified": false },
+        { "slug": "b", "name": "B", "type": "drift", "verified": false },
+        { "slug": "c", "name": "C", "type": "drift", "verified": false },
+        { "slug": "d", "name": "D", "type": "drift", "verified": false }
+      ]
+    },
+    {
+      "slug": "gunsai",
+      "name": "Gunsai",
+      "real_world_reference": "Gunsai Touge (Gunma Cycle Sports Center)",
+      "verified": false,
+      "layouts": [
+        { "slug": "drift", "name": "Gunsai Drift", "type": "drift", "verified": false },
+        { "slug": "ta", "name": "Gunsai TA", "type": "time_attack", "verified": false }
+      ],
+      "notes": "Ada sumber yang menyebut versi pendek dan versi penuh. Cek apakah itu layout terpisah."
+    },
+    {
+      "slug": "iwd",
+      "name": "IWD Speedway",
+      "real_world_reference": "Irwindale Speedway, California",
+      "verified": false,
+      "layouts": [
+        { "slug": "speedway", "name": "IWD Speedway", "type": "drift", "verified": false },
+        { "slug": "ta", "name": "IWD TA", "type": "time_attack", "verified": false }
+      ]
+    },
+    {
+      "slug": "ebisu-minami",
+      "name": "Ebisu Minami",
+      "real_world_reference": "Ebisu Circuit, South Course",
+      "verified": false,
+      "layouts": []
+    },
+    {
+      "slug": "ebisu-touge",
+      "name": "Ebisu Touge",
+      "real_world_reference": "Ebisu Circuit, Touge Course",
+      "verified": false,
+      "layouts": []
+    },
+    {
+      "slug": "ebisu-school",
+      "name": "Ebisu School",
+      "real_world_reference": "Ebisu Circuit, School Course",
+      "verified": false,
+      "layouts": []
+    },
+    {
+      "slug": "meihan",
+      "name": "Meihan",
+      "real_world_reference": "Meihan Sportsland, Nara",
+      "verified": false,
+      "layouts": [],
+      "notes": "Satu sumber menyebut nama di game 'Kansai'. Cek nama yang tampil di game."
+    },
+    {
+      "slug": "hiroshima",
+      "name": "Hiroshima",
+      "real_world_reference": null,
+      "verified": false,
+      "layouts": []
+    },
+    {
+      "slug": "grange",
+      "name": "Grange",
+      "real_world_reference": null,
+      "verified": false,
+      "layouts": []
+    },
+    {
+      "slug": "usair",
+      "name": "USAIR",
+      "real_world_reference": null,
+      "verified": false,
+      "layouts": []
+    }
+  ]
+}

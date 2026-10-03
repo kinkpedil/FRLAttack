@@ -1,0 +1,22 @@
+{
+  "_status": "DRAF. Dikumpulkan dari hasil pencarian web (situs komunitas, bukan sumber resmi). Nama di kolom name harus sama persis dengan yang tampil di game. Ubah verified ke true setelah dicek.",
+  "_sources": [
+    "https://fr-legends.fandom.com/wiki/Category:Cars",
+    "https://www.igcd.net/game.php?id=1000013560",
+    "https://frlmods.com/cars"
+  ],
+  "cars": [
+    { "slug": "ae86", "name": "AE86", "real_world_reference": "Toyota Sprinter Trueno AE86", "verified": false },
+    { "slug": "s13", "name": "S13", "real_world_reference": "Nissan Silvia S13", "verified": false },
+    { "slug": "180sx", "name": "180SX", "real_world_reference": "Nissan 180SX", "verified": false },
+    { "slug": "s14", "name": "S14", "real_world_reference": "Nissan Silvia S14 (Zenki/Kouki)", "verified": false, "notes": "Cek apakah Zenki dan Kouki dihitung mobil terpisah." },
+    { "slug": "s15", "name": "S15", "real_world_reference": "Nissan Silvia S15", "verified": false },
+    { "slug": "r32", "name": "R32", "real_world_reference": "Nissan Skyline R32 GTS-T", "verified": false, "notes": "Disebut punya beberapa varian (2D, 4D, dll). Cek apakah dipisah." },
+    { "slug": "gt86", "name": "GT86", "real_world_reference": "Toyota 86", "verified": false },
+    { "slug": "altezza", "name": "Altezza", "real_world_reference": "Toyota Altezza / Lexus IS200", "verified": false },
+    { "slug": "jzx100-mkii", "name": "JZX100 MKII", "real_world_reference": "Toyota Mark II JZX100", "verified": false },
+    { "slug": "jzx100-chaser", "name": "JZX100 Chaser", "real_world_reference": "Toyota Chaser JZX100", "verified": false },
+    { "slug": "rx7-fc", "name": "RX-7 FC", "real_world_reference": "Mazda RX-7 FC", "verified": false },
+    { "slug": "e30", "name": "E30", "real_world_reference": "BMW 3 Series E30", "verified": false }
+  ]
+}
